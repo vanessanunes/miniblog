@@ -14,8 +14,8 @@ config = context.config
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
-if config.config_file_name is not None:
-    fileConfig(config.config_file_name)
+# if config.config_file_name is not None:
+#     fileConfig(config.config_file_name)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
@@ -33,7 +33,7 @@ config.set_section_option(section, "POSTGRES_USER", getenv("POSTGRES_USER", "pos
 config.set_section_option(section, "POSTGRES_PASSWORD", getenv("POSTGRES_PASSWORD", "2545"))
 config.set_section_option(section, "POSTGRES_HOST", getenv("POSTGRES_HOST", "localhost"))
 config.set_section_option(section, "POSTGRES_DATABASE", getenv("POSTGRES_DB", "miniblog"))
-
+config.set_section_option(section, "POSTGRES_PORT", getenv("POSTGRES_PORT", "1313"))
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.

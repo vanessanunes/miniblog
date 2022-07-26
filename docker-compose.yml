@@ -7,12 +7,13 @@ services:
     restart: always
     container_name: db_miniblog
     ports:
-      - 5432:5432
+      - 1313:5432
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
     env_file:
       - .env
 
@@ -22,10 +23,12 @@ services:
     restart: always
     build: .
     ports:
-      - 8000:8000
+      - 3813:8000
     links:
       - dbminiblog
     command: uvicorn "app.main:app" --host 0.0.0.0 --reload
+    environment:
+      APP_PORT: ${APP_PORT}
     env_file:
       - .env
 
