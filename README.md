@@ -1,43 +1,56 @@
 
-## Requirement
-Python 3.10
-SQLAlchemy
-Alembic
-Docker Compose
+## Requesitos
 
-## Configuration
-To install dependencies, first, create your virtual environment, run:
-` pip install -r requirements.txt`
+- Python 3.10
+- SQLAlchemy
+- Alembic
+- Docker Compose
 
-To run database configurations, run
+## Configurações iniciais
+
+Para instalar as dependencias, primeiro, crie uma ambiente de desenvolvimento e rode o seguinte comando:
+
+`pip install -r requirements.txt`
+
+
+Para criar as tabelas do banco rode:
+
 ```
 alembic revision --autogenerate -m "create tables"
+
+alembic upgrade head
+```
+
+Se você precisa mudar alguma coisa no banco de dados, mude o arquivo `data_definition.py` e depois rode:
+
+```
+alembic run migration_revision "escreva aqui seu comentário"
+
 alembic upgrade head
 ```
 
-If need change something in the database, change file `data_definition.py` and after run:
-```
-pipenv run migration_revision "escreva aqui seu comentário"
-
-alembic upgrade head
-
-```
-
-With nedded to undone things in database, run (and don't forget to delete the file generate from your last migration, with it's necessary):
+Se precisar refazer alguma alteração no banco, rode (e não se esquece de deletar o arquivo que foi gerado para sua ultima migration, se isso for necessário)
 
 ```
 alembic downgrade -1
 ```
 
-## Run
-To run local, run
-`uvicorn "app.main:app" --reload`
+## Rodar
 
-Or
-`make run`
+### Unicorn
+
+Para rodar localmente você pode optar por algum desses dois comandos:
+
+`uvicorn "app.main:app" --reload` or `make run`
+
+### Docker
+
+Também temos a opção para Docker, e assim você pode executar algum desses comandos:
+
+`docker-compose up -d` or `make run-docker`
 
 
-
+<!---
 
 api -> 
 arquivo ou pasta models -> models as tabelinhas
@@ -57,4 +70,4 @@ https://fastapi.tiangolo.com/tutorial/bigger-applications/#import-apirouter
 https://fastapi.tiangolo.com/tutorial/bigger-applications/#import-fastapi
 
 
-
+--->
