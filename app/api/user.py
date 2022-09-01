@@ -6,4 +6,4 @@ router = APIRouter()
 
 @router.get("/")
 async def index():
-    return {'hello': settings.postgre_url}
+    return {'hello': 'finalmente'}
