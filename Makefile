@@ -4,4 +4,3 @@ run:
 
 run-docker:
 	sudo docker-compose up
-

@@ -1,21 +1,25 @@
-from os import getenv
 from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
     environment: str = "local"
-    # database_string = f"postgresql://{getenv("POSTGRES_USER")}:{getenv("POSTGRES_PASSWORD")}@{getenv("POSTGRES_HOST")}/{getenv("POSTGRES_DB")}"
+    postgres_user: str
+    postgres_password: str
+    postgres_host: str
+    postgres_db: str
 
     @property
     def postgre_url(self) -> str:
-        return "postgresql://" + str(
-            getenv("POSTGRES_USER")
-        ) + ":" + str(
-            getenv("POSTGRES_PASSWORD")
-        ) + "@" + str(
-            getenv("POSTGRES_HOST")
-        ) + "/" + str(
-            getenv("POSTGRES_DB")
-        )
+        """Create a databse url
+
+        Returns:
+            str: database url
+        """
+        return f"postgresql://{self.postgres_user}:" \
+            f"{self.postgres_password}@{self.postgres_host}/{self.postgres_db}"
+
+    class Config():
+        env_file = '.env'
+
 
 settings = Settings()
